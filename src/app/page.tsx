@@ -39,6 +39,14 @@ export default function Home() {
     }
   };
 
+  const removeCity = (target: string) => {
+    setCities((prev) => prev.filter((city) => city !== target));
+  };
+
+  const removeUserLocation = () => {
+    setCoords({});
+  };
+
   return (
     <div>
       <h1 className="mb-4">Weather App</h1>
@@ -55,8 +63,12 @@ export default function Home() {
       </div>
       <div>
         {isNotEmpty(cities) &&
-          cities.map((cityName, index) => (
-            <CityWeatherCard key={index} city={cityName} />
+          cities.map((city, index) => (
+            <CityWeatherCard
+              key={index}
+              city={city}
+              onDelete={() => removeCity(city)}
+            />
           ))}
       </div>
       <div>
@@ -64,6 +76,7 @@ export default function Home() {
           <LocationWeatherCard
             latitude={coords?.latitude}
             longitude={coords?.longitude}
+            onDelete={removeUserLocation}
           />
         )}
       </div>

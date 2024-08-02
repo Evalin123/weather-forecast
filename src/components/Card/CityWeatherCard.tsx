@@ -1,16 +1,24 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import Image from "next/image";
 import { getWeatherByCityQuery } from "@/app/api/weather/byCity/route";
 import { useQuery } from "@tanstack/react-query";
 import { isNotNil } from "ramda";
+import { Button } from "../ui/button";
 
 type CityWeatherCardProps = {
   city?: string;
+  onDelete: () => void;
 };
 
-const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
-  const { data, isPending } = useQuery({
+const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
+  const { data, isPending, refetch } = useQuery({
     ...getWeatherByCityQuery({ city }),
     enabled: isNotNil(city),
   });
@@ -31,6 +39,16 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
         <p>{data?.main.temp} °C</p>
         <p>{data?.weather[0].description}</p>
       </CardContent>
+      <CardFooter>
+        <Button onClick={onDelete}>Delete</Button>
+        <Button
+          onClick={() => {
+            refetch();
+          }}
+        >
+          Update
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
