@@ -18,7 +18,6 @@ export default function Home() {
 
   const addCity = () => {
     if (isNotEmpty(cityInput) && !cities.includes(cityInput)) {
-      console.log("first");
       setCities([...cities, cityInput]);
       setCityInput("");
     }
@@ -29,7 +28,6 @@ export default function Home() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-
           setCoords({ latitude, longitude });
         },
         (error) => {
