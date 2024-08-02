@@ -7,10 +7,11 @@ import {
   CardTitle,
 } from "../ui/card";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getWeatherByCoordsQuery } from "@/app/api/weather/byCoords/route";
 import { isNotNil } from "ramda";
 import { Button } from "../ui/button";
+import { SkeletonCard } from "../shared/Card/SkeletonCard";
 
 type LocationWeatherCardProps = {
   latitude?: number;
@@ -23,13 +24,17 @@ const LocationWeatherCard = ({
   longitude,
   onDelete,
 }: LocationWeatherCardProps) => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isPending, isPlaceholderData } = useQuery({
     ...getWeatherByCoordsQuery({ latitude, longitude }),
     enabled: isNotNil(latitude) && isNotNil(longitude),
+    placeholderData: keepPreviousData,
   });
 
+  if (isPending || isPlaceholderData) {
+    return <SkeletonCard />;
+  }
   return (
-    <Card>
+    <Card className="w-[700px]">
       <CardHeader>
         <CardTitle>{data?.name}</CardTitle>
       </CardHeader>

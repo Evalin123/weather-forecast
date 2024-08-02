@@ -8,9 +8,10 @@ import {
 } from "../ui/card";
 import Image from "next/image";
 import { getWeatherByCityQuery } from "@/app/api/weather/byCity/route";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { isNotNil } from "ramda";
 import { Button } from "../ui/button";
+import { SkeletonCard } from "../shared/Card/SkeletonCard";
 
 type CityWeatherCardProps = {
   city?: string;
@@ -18,13 +19,18 @@ type CityWeatherCardProps = {
 };
 
 const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
-  const { data, isPending, refetch } = useQuery({
+  const { data, isPending, isPlaceholderData, refetch } = useQuery({
     ...getWeatherByCityQuery({ city }),
     enabled: isNotNil(city),
+    placeholderData: keepPreviousData,
   });
 
+  if (isPending || isPlaceholderData) {
+    return <SkeletonCard />;
+  }
+
   return (
-    <Card>
+    <Card className="w-[700px] mb-4">
       <CardHeader>
         <CardTitle>{data?.name}</CardTitle>
       </CardHeader>
