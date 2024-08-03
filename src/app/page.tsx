@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Navigation } from "lucide-react";
 import { isNotEmpty } from "ramda";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
   const [cityInput, setCityInput] = useState<string>("");

@@ -12,6 +12,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
+import { toast } from "sonner";
 
 type CityWeatherCardProps = {
   city?: string;
@@ -19,11 +20,16 @@ type CityWeatherCardProps = {
 };
 
 const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
-  const { data, isPending, isPlaceholderData, refetch } = useQuery({
+  const { data, isPending, isPlaceholderData, isError, refetch } = useQuery({
     ...getWeatherByCityQuery({ city }),
     enabled: isNotNil(city),
     placeholderData: keepPreviousData,
+    retry: false,
   });
+
+  if (isError) {
+    return null;
+  }
 
   if (isPending || isPlaceholderData) {
     return <SkeletonCard />;
