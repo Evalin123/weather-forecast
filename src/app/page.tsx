@@ -7,7 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Navigation } from "lucide-react";
 import { isNotEmpty } from "ramda";
 import { useState } from "react";
-import { toast } from "sonner";
+import {
+  DragDropContext,
+  Draggable,
+  DragUpdate,
+  Droppable,
+} from "@hello-pangea/dnd";
 
 export default function Home() {
   const [cityInput, setCityInput] = useState<string>("");
@@ -48,6 +53,20 @@ export default function Home() {
     setCoords({});
   };
 
+  const onDragEnd = (event: DragUpdate) => {
+    const { source, destination } = event;
+
+    if (!destination) {
+      return;
+    }
+    const newItems = [...cities];
+    const [remove] = newItems.splice(source.index, 1);
+
+    newItems.splice(destination.index, 0, remove);
+
+    setCities(newItems);
+  };
+
   return (
     <div>
       <h1 className="mb-4">Weather App</h1>
@@ -63,14 +82,37 @@ export default function Home() {
         </Button>
       </div>
       <div>
-        {isNotEmpty(cities) &&
-          cities.map((city, index) => (
-            <CityWeatherCard
-              key={index}
-              city={city}
-              onDelete={() => removeCity(city)}
-            />
-          ))}
+        {isNotEmpty(cities) && (
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="drop-id">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  demo
+                  {cities.map((city, index) => (
+                    <div key={city}>
+                      <Draggable draggableId={city} index={index}>
+                        {(provided) => (
+                          <div
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <CityWeatherCard
+                              key={index}
+                              city={city}
+                              onDelete={() => removeCity(city)}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    </div>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
       </div>
       <div>
         {isNotEmpty(coords) && (
