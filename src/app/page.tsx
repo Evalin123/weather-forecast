@@ -81,7 +81,7 @@ export default function Home() {
           <Navigation className="h-5 w-5" />
         </Button>
       </div>
-      <div>
+      <div className="w-[700px]">
         {isNotEmpty(cities) && (
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="drop-id">

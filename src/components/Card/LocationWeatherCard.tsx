@@ -50,7 +50,9 @@ const LocationWeatherCard = ({
         <p>{data?.weather[0].description}</p>
       </CardContent>
       <CardFooter>
-        <Button onClick={onDelete}>Delete</Button>
+        <Button className="mr-2" onClick={onDelete}>
+          Delete
+        </Button>
         <Button
           onClick={() => {
             refetch();
