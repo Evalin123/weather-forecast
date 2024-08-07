@@ -11,26 +11,16 @@ import {
   Droppable,
 } from "@hello-pangea/dnd";
 import { Navigation } from "lucide-react";
-import { isNotEmpty, isNotNil } from "ramda";
+import { isNotEmpty } from "ramda";
 import { useStore } from "./store";
 import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
-import {
-  getWeatherByCity,
-  headWeatherByCity,
-} from "./api/weather/byCity/route";
+import { getWeatherByCity } from "./api/weather/byCity/route";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
 export default function Home() {
   const { cities, coords, setCities, setCoords } = useStore();
-
-  // const addCity = () => {
-  //   if (isNotNil(cityInput) && !cities.includes(cityInput)) {
-  //     setCities([...cities, cityInput]);
-  //     setCityInput("");
-  //   }
-  // };
 
   const addUserLocation = () => {
     if (navigator.geolocation) {
