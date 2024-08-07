@@ -30,11 +30,11 @@ export default function Home() {
           setCoords({ latitude, longitude });
         },
         (error) => {
-          console.error("Error get user location: ", error);
+          toast.error(`Error get user location: ${error.message}`);
         }
       );
     } else {
-      console.log("Geolocation is not supported by this browser");
+      toast.warning("Geolocation is not supported by this browser");
     }
   };
 
