@@ -111,11 +111,13 @@ const AddCityItem = () => {
   const handleClick = async () => {
     if (inputRef.current) {
       try {
-        const response = await mutateAsync({ city: inputRef.current.value });
+        const response = await mutateAsync({
+          city: inputRef.current.value.trim(),
+        });
         setCities([...cities, response.name]);
       } catch (error) {
         if (isAxiosError(error)) {
-          removeCity(inputRef.current.value);
+          console.warn(error.message);
           toast.error("City Not Found");
         }
       } finally {
