@@ -5,7 +5,7 @@ import LocationWeatherCard from "@/components/Card/LocationWeatherCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Navigation } from "lucide-react";
-import { isNotEmpty } from "ramda";
+import { isNotEmpty, isNotNil } from "ramda";
 import { useState } from "react";
 import {
   DragDropContext,
@@ -13,6 +13,8 @@ import {
   DragUpdate,
   Droppable,
 } from "@hello-pangea/dnd";
+import { headWeatherByCityQuery } from "./api/weather/byCity/route";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
   const [cityInput, setCityInput] = useState<string>("");
@@ -22,8 +24,14 @@ export default function Home() {
     longitude?: number;
   }>({});
 
+  const { isSuccess } = useQuery({
+    ...headWeatherByCityQuery({ city: cityInput }),
+    enabled: isNotNil(cityInput),
+    retry: false,
+  });
+
   const addCity = () => {
-    if (isNotEmpty(cityInput) && !cities.includes(cityInput)) {
+    if (isNotEmpty(cityInput) && !cities.includes(cityInput) && isSuccess) {
       setCities([...cities, cityInput]);
       setCityInput("");
     }
