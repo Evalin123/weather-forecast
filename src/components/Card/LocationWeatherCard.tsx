@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getWeatherByCoordsQuery } from "@/app/api/weather/byCoords/route";
-import { isNil, isNotNil } from "ramda";
+import { isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
 import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
@@ -31,7 +31,7 @@ const LocationWeatherCard = ({
     placeholderData: keepPreviousData,
   });
 
-  if (isNil(data) || isError) {
+  if (isError) {
     return null;
   }
 

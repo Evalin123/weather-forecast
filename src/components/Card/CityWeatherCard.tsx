@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import { getWeatherByCityQuery } from "@/app/api/weather/byCity/route";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { isNil, isNotNil } from "ramda";
+import { isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
 import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
@@ -29,7 +29,7 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
     retry: false,
   });
 
-  if (isNil(data) || isError) {
+  if (isError) {
     return null;
   }
 
