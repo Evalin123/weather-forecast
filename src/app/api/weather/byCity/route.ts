@@ -8,7 +8,7 @@ export type GetWeatherByCityParams = {
   city?: string;
 };
 
-const getWeatherByCity = async ({ city }: GetWeatherByCityParams) => {
+export const getWeatherByCity = async ({ city }: GetWeatherByCityParams) => {
   const { data } = await axios.get<GetWeatherResponse>(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}&units=metric`
   );
@@ -20,3 +20,10 @@ export const getWeatherByCityQuery = (params: GetWeatherByCityParams) =>
     queryKey: ["getWeatherByCity", params],
     queryFn: () => getWeatherByCity(params),
   });
+
+export const headWeatherByCity = async ({ city }: GetWeatherByCityParams) => {
+  const { data } = await axios.head<GetWeatherResponse>(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}&units=metric`
+  );
+  return data;
+};

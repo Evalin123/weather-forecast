@@ -29,12 +29,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
     retry: false,
   });
 
-  useEffect(() => {
-    if (isError) {
-      city && removeCity(city);
-    }
-  }, [isError]);
-
   if (isNil(data) || isError) {
     return null;
   }

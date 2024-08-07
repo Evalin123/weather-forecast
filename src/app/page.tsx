@@ -13,17 +13,24 @@ import {
 import { Navigation } from "lucide-react";
 import { isNotEmpty, isNotNil } from "ramda";
 import { useStore } from "./store";
+import { useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
+import {
+  getWeatherByCity,
+  headWeatherByCity,
+} from "./api/weather/byCity/route";
+import { isAxiosError } from "axios";
+import { toast } from "sonner";
 
 export default function Home() {
-  const { cityInput, cities, coords, setCityInput, setCities, setCoords } =
-    useStore();
+  const { cities, coords, setCities, setCoords } = useStore();
 
-  const addCity = () => {
-    if (isNotNil(cityInput) && !cities.includes(cityInput)) {
-      setCities([...cities, cityInput]);
-      setCityInput("");
-    }
-  };
+  // const addCity = () => {
+  //   if (isNotNil(cityInput) && !cities.includes(cityInput)) {
+  //     setCities([...cities, cityInput]);
+  //     setCityInput("");
+  //   }
+  // };
 
   const addUserLocation = () => {
     if (navigator.geolocation) {
@@ -59,12 +66,7 @@ export default function Home() {
     <div>
       <h1 className="mb-4">Weather App</h1>
       <div className="mb-5 flex w-full max-w-md items-center space-x-2">
-        <Input
-          value={cityInput}
-          placeholder="Enter city name"
-          onChange={(e) => setCityInput(e.target.value)}
-        />
-        <Button onClick={addCity}>Get Weather</Button>
+        <AddCityItem />
         <Button variant="ghost" size="icon" onClick={addUserLocation}>
           <Navigation className="h-5 w-5" />
         </Button>
@@ -108,3 +110,33 @@ export default function Home() {
     </div>
   );
 }
+
+const AddCityItem = () => {
+  const { cities, setCities, removeCity } = useStore();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { mutateAsync } = useMutation({
+    mutationFn: getWeatherByCity,
+  });
+
+  const handleClick = async () => {
+    if (inputRef.current) {
+      try {
+        const response = await mutateAsync({ city: inputRef.current.value });
+        setCities([...cities, response.name]);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          removeCity(inputRef.current.value);
+          toast.error("City Not Found");
+        }
+      } finally {
+        inputRef.current.value = "";
+      }
+    }
+  };
+  return (
+    <>
+      <Input ref={inputRef} placeholder="Enter city name" />
+      <Button onClick={handleClick}>Get Weather</Button>
+    </>
+  );
+};
