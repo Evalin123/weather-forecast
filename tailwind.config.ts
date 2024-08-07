@@ -1,6 +1,15 @@
 import type { Config } from "tailwindcss";
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
+const WEATHER_COLOR = [
+  "#4a4e69",
+  "#6a0572",
+  "#1b98e0",
+  "#e0f7fa",
+  "#9e9d89",
+  "#f0c929",
+  "#778da9",
+];
 const config = {
   darkMode: ["class"],
   content: [
@@ -19,6 +28,15 @@ const config = {
       },
     },
     extend: {
+      backgroundColor: {
+        "#778da9": "#778da9",
+        "#4a4e69": "#4a4e69",
+        "#6a0572": "#6a0572",
+        "#1b98e0": "#1b98e0",
+        "#e0f7fa": "#e0f7fa",
+        "#9e9d89": "#9e9d89",
+        "#f0c929": "#f0c929",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

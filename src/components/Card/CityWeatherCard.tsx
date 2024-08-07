@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -9,10 +9,11 @@ import {
 import Image from "next/image";
 import { getWeatherByCityQuery } from "@/app/api/weather/byCity/route";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { isNotNil } from "ramda";
+import { isNil, isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
-import { toast } from "sonner";
+import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
+import clsx from "clsx";
 
 type CityWeatherCardProps = {
   city?: string;
@@ -27,16 +28,17 @@ const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
     retry: false,
   });
 
-  if (isError) {
+  if (isNil(data) || isError) {
     return null;
   }
 
   if (isPending || isPlaceholderData) {
     return <SkeletonCard />;
   }
+  const bgColor = getWeatherBackgroundColor(data.weather[0].id);
 
   return (
-    <Card className="w-[700px] mb-4">
+    <Card className={clsx(["w-[700px]", "mb-4", bgColor])}>
       <CardHeader>
         <CardTitle>{data?.name}</CardTitle>
       </CardHeader>

@@ -9,9 +9,10 @@ import {
 import Image from "next/image";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getWeatherByCoordsQuery } from "@/app/api/weather/byCoords/route";
-import { isNotNil } from "ramda";
+import { isNil, isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
+import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
 
 type LocationWeatherCardProps = {
   latitude?: number;
@@ -24,17 +25,23 @@ const LocationWeatherCard = ({
   longitude,
   onDelete,
 }: LocationWeatherCardProps) => {
-  const { data, refetch, isPending, isPlaceholderData } = useQuery({
+  const { data, refetch, isPending, isPlaceholderData, isError } = useQuery({
     ...getWeatherByCoordsQuery({ latitude, longitude }),
     enabled: isNotNil(latitude) && isNotNil(longitude),
     placeholderData: keepPreviousData,
   });
 
+  if (isNil(data) || isError) {
+    return null;
+  }
+
   if (isPending || isPlaceholderData) {
     return <SkeletonCard />;
   }
+
+  const bgColor = getWeatherBackgroundColor(data.weather[0].id);
   return (
-    <Card className="w-[700px]">
+    <Card className={`w-[700px] ${bgColor}`}>
       <CardHeader>
         <CardTitle>{data?.name}</CardTitle>
       </CardHeader>

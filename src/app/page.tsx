@@ -87,7 +87,6 @@ export default function Home() {
             <Droppable droppableId="drop-id">
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
-                  demo
                   {cities.map((city, index) => (
                     <div key={city}>
                       <Draggable draggableId={city} index={index}>
