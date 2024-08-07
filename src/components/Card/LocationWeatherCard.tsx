@@ -13,18 +13,18 @@ import { isNil, isNotNil } from "ramda";
 import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
 import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
+import { useStore } from "@/app/store";
 
 type LocationWeatherCardProps = {
   latitude?: number;
   longitude?: number;
-  onDelete: () => void;
 };
 
 const LocationWeatherCard = ({
   latitude,
   longitude,
-  onDelete,
 }: LocationWeatherCardProps) => {
+  const removeUserLocation = useStore((state) => state.removeUserLocation);
   const { data, refetch, isPending, isPlaceholderData, isError } = useQuery({
     ...getWeatherByCoordsQuery({ latitude, longitude }),
     enabled: isNotNil(latitude) && isNotNil(longitude),
@@ -57,7 +57,7 @@ const LocationWeatherCard = ({
         <p>{data?.weather[0].description}</p>
       </CardContent>
       <CardFooter>
-        <Button className="mr-2" onClick={onDelete}>
+        <Button className="mr-2" onClick={removeUserLocation}>
           Delete
         </Button>
         <Button

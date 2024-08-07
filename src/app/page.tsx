@@ -4,34 +4,22 @@ import CityWeatherCard from "@/components/Card/CityWeatherCard";
 import LocationWeatherCard from "@/components/Card/LocationWeatherCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Navigation } from "lucide-react";
-import { isNotEmpty, isNotNil } from "ramda";
-import { useState } from "react";
 import {
   DragDropContext,
   Draggable,
   DragUpdate,
   Droppable,
 } from "@hello-pangea/dnd";
-import { headWeatherByCityQuery } from "./api/weather/byCity/route";
-import { useQuery } from "@tanstack/react-query";
+import { Navigation } from "lucide-react";
+import { isNotEmpty, isNotNil } from "ramda";
+import { useStore } from "./store";
 
 export default function Home() {
-  const [cityInput, setCityInput] = useState<string>("");
-  const [cities, setCities] = useState<string[]>([]);
-  const [coords, setCoords] = useState<{
-    latitude?: number;
-    longitude?: number;
-  }>({});
-
-  const { isSuccess } = useQuery({
-    ...headWeatherByCityQuery({ city: cityInput }),
-    enabled: isNotNil(cityInput),
-    retry: false,
-  });
+  const { cityInput, cities, coords, setCityInput, setCities, setCoords } =
+    useStore();
 
   const addCity = () => {
-    if (isNotEmpty(cityInput) && !cities.includes(cityInput) && isSuccess) {
+    if (isNotNil(cityInput) && !cities.includes(cityInput)) {
       setCities([...cities, cityInput]);
       setCityInput("");
     }
@@ -51,14 +39,6 @@ export default function Home() {
     } else {
       console.log("Geolocation is not supported by this browser");
     }
-  };
-
-  const removeCity = (target: string) => {
-    setCities((prev) => prev.filter((city) => city !== target));
-  };
-
-  const removeUserLocation = () => {
-    setCoords({});
   };
 
   const onDragEnd = (event: DragUpdate) => {
@@ -104,11 +84,7 @@ export default function Home() {
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                           >
-                            <CityWeatherCard
-                              key={index}
-                              city={city}
-                              onDelete={() => removeCity(city)}
-                            />
+                            <CityWeatherCard key={index} city={city} />
                           </div>
                         )}
                       </Draggable>
@@ -126,7 +102,6 @@ export default function Home() {
           <LocationWeatherCard
             latitude={coords?.latitude}
             longitude={coords?.longitude}
-            onDelete={removeUserLocation}
           />
         )}
       </div>

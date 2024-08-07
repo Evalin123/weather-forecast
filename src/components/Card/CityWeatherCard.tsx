@@ -14,19 +14,26 @@ import { Button } from "../ui/button";
 import { SkeletonCard } from "../shared/Card/SkeletonCard";
 import { getWeatherBackgroundColor } from "@/utils/getWeatherBackgroundColor";
 import clsx from "clsx";
+import { useStore } from "@/app/store";
 
 type CityWeatherCardProps = {
   city?: string;
-  onDelete: () => void;
 };
 
-const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
+const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
+  const removeCity = useStore((state) => state.removeCity);
   const { data, isPending, isPlaceholderData, isError, refetch } = useQuery({
     ...getWeatherByCityQuery({ city }),
     enabled: isNotNil(city),
     placeholderData: keepPreviousData,
     retry: false,
   });
+
+  useEffect(() => {
+    if (isError) {
+      city && removeCity(city);
+    }
+  }, [isError]);
 
   if (isNil(data) || isError) {
     return null;
@@ -54,7 +61,7 @@ const CityWeatherCard = ({ city, onDelete }: CityWeatherCardProps) => {
         <p>{data?.weather[0].description}</p>
       </CardContent>
       <CardFooter>
-        <Button className="mr-2" onClick={onDelete}>
+        <Button className="mr-2" onClick={() => city && removeCity(city)}>
           Delete
         </Button>
         <Button
