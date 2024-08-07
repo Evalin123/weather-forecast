@@ -1,6 +1,6 @@
-# Weather App
+# Weather Forecast App
 
-A simple weather application built with Next.js and OpenWeatherMap API.
+A simple weather forecast application built with Next.js and OpenWeatherMap API.
 
 ## Features
 - Add and display weather information for multiple cities.
@@ -16,8 +16,8 @@ A simple weather application built with Next.js and OpenWeatherMap API.
 
 ## Dependencies
 - Next.js
-- React Query
+- [TanStack Query](https://tanstack.com/query/latest)
 - Axios
-- tailwindcss
-- shadcn
-- react-beautiful-dnd (for drag-and-drop functionality)
+- [tailwindcss](https://tailwindcss.com/)
+- [shadcn](https://ui.shadcn.com/)
+- [hello-pangea/dnd](https://dnd.hellopangea.com/?path=/docs/welcome--docs)
