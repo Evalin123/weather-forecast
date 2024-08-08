@@ -3,9 +3,10 @@
 A simple weather forecast application built with Next.js and OpenWeatherMap API.
 
 ## Features
-- Add and display weather information for multiple cities.
-- Perform CRUD operations on weather cards.
-- Drag and drop to reorder weather cards.
+
+-   Add and display weather information for multiple cities.
+-   Perform CRUD operations on weather cards.
+-   Drag and drop to reorder weather cards.
 
 ## Getting Started
 
@@ -15,9 +16,10 @@ A simple weather forecast application built with Next.js and OpenWeatherMap API.
 4. Run `pnpm run dev` to start the development server.
 
 ## Dependencies
-- Next.js
-- [TanStack Query](https://tanstack.com/query/latest)
-- Axios
-- [tailwindcss](https://tailwindcss.com/)
-- [shadcn](https://ui.shadcn.com/)
-- [hello-pangea/dnd](https://dnd.hellopangea.com/?path=/docs/welcome--docs)
+
+-   Next.js
+-   [TanStack Query](https://tanstack.com/query/latest)
+-   Axios
+-   [tailwindcss](https://tailwindcss.com/)
+-   [shadcn](https://ui.shadcn.com/)
+-   [hello-pangea/dnd](https://dnd.hellopangea.com/?path=/docs/welcome--docs)
