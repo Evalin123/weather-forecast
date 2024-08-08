@@ -97,7 +97,7 @@ export default function Home() {
 }
 
 const AddCityItem = () => {
-    const { cities, setCities, removeCity } = useStore();
+    const { cities, setCities } = useStore();
     const inputRef = useRef<HTMLInputElement>(null);
     const { mutateAsync } = useMutation({
         mutationFn: getWeatherByCity,
