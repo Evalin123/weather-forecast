@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import Image from 'next/image';
 import { getWeatherByCityQuery } from '@/app/api/weather/byCity/route';
