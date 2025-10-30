@@ -8,7 +8,7 @@ import { DragDropContext, Draggable, DragUpdate, Droppable } from '@hello-pangea
 import { Navigation } from 'lucide-react';
 import { isNotEmpty } from 'ramda';
 import { useStore } from './store';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { getWeatherByCity } from './api/weather/byCity/route';
 import { isAxiosError } from 'axios';
@@ -48,15 +48,20 @@ export default function Home() {
     };
 
     return (
-        <div>
-            <h1 className="mb-4">Weather App</h1>
-            <div className="mb-5 flex w-full max-w-md items-center space-x-2">
+        <div className="weather-container flex flex-col items-center">
+            <h1 className="weather-title text-center">Weather Forecast</h1>
+            <div className="search-container flex w-full items-center gap-3">
                 <AddCityItem />
-                <Button variant="ghost" size="icon" onClick={addUserLocation}>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={addUserLocation}
+                    className="btn-primary shrink-0 bg-white hover:bg-gray-100 border-2"
+                >
                     <Navigation className="h-5 w-5" />
                 </Button>
             </div>
-            <div className="w-[700px]">
+            <div className="cards-grid w-full">
                 {isNotEmpty(cities) && (
                     <DragDropContext onDragEnd={onDragEnd}>
                         <Droppable droppableId="drop-id">
@@ -83,8 +88,6 @@ export default function Home() {
                         </Droppable>
                     </DragDropContext>
                 )}
-            </div>
-            <div>
                 {isNotEmpty(coords) && (
                     <LocationWeatherCard
                         latitude={coords?.latitude}
@@ -99,12 +102,13 @@ export default function Home() {
 const AddCityItem = () => {
     const { cities, setCities } = useStore();
     const inputRef = useRef<HTMLInputElement>(null);
-    const { mutateAsync } = useMutation({
+    const [inputValue, setInputValue] = useState('');
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: getWeatherByCity,
     });
 
     const handleClick = async () => {
-        if (inputRef.current) {
+        if (inputRef.current && inputValue.trim()) {
             try {
                 const response = await mutateAsync({
                     city: inputRef.current.value.trim(),
@@ -117,13 +121,31 @@ const AddCityItem = () => {
                 }
             } finally {
                 inputRef.current.value = '';
+                setInputValue('');
             }
         }
     };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
+
     return (
         <>
-            <Input ref={inputRef} placeholder="Enter city name" />
-            <Button onClick={handleClick}>Get Weather</Button>
+            <Input
+                ref={inputRef}
+                placeholder="Enter city name"
+                className="input-field flex-1 h-12 text-lg border-2"
+                onChange={handleInputChange}
+                value={inputValue}
+            />
+            <Button
+                onClick={handleClick}
+                disabled={!inputValue.trim() || isPending}
+                className="btn-primary h-12 px-6 text-base font-semibold"
+            >
+                {isPending ? 'Loading...' : 'Get Weather'}
+            </Button>
         </>
     );
 };

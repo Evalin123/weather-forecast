@@ -1,11 +1,11 @@
 const weatherRanges = [
-    { start: 200, end: 300, color: 'bg-orange-900' }, // Thunderstorm
-    { start: 300, end: 400, color: 'bg-rose-100' }, // Drizzle
-    { start: 500, end: 600, color: 'bg-indigo-100' }, // Rain
-    { start: 600, end: 700, color: 'bg-fuchsia-500' }, // Snow
-    { start: 700, end: 800, color: 'bg-cyan-200' }, // Atmosphere
-    { start: 800, end: 801, color: 'bg-green-100' }, // Clear
-    { start: 801, end: 900, color: 'bg-lime-100' }, // Clouds
+    { start: 200, end: 300, color: 'bg-slate-700' }, // Thunderstorm - 深灰色
+    { start: 300, end: 400, color: 'bg-blue-200' }, // Drizzle - 淺藍色
+    { start: 500, end: 600, color: 'bg-blue-300' }, // Rain - 中藍色
+    { start: 600, end: 700, color: 'bg-cyan-50' }, // Snow - 極淺青色
+    { start: 700, end: 800, color: 'bg-amber-100' }, // Atmosphere - 淺琥珀色
+    { start: 800, end: 801, color: 'bg-sky-200' }, // Clear - 天藍色
+    { start: 801, end: 900, color: 'bg-gray-200' }, // Clouds - 淺灰色
 ];
 
 export const getWeatherBackgroundColor = (id: number) => {
