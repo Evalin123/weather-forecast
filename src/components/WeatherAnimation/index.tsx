@@ -3,6 +3,7 @@ import { getWeatherType, getWeatherBackgroundColor } from './constants';
 import RainAnimation from './RainAnimation';
 import ThunderstormAnimation from './ThunderstormAnimation';
 import DrizzleAnimation from './DrizzleAnimation';
+import SnowAnimation from './SnowAnimation';
 
 type WeatherAnimationProps = {
     weatherId: number;
@@ -23,11 +24,18 @@ const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
         case 'drizzle':
             animationComponent = <DrizzleAnimation />;
             break;
+        case 'snow':
+            animationComponent = <SnowAnimation />;
+            break;
         default:
             animationComponent = null;
     }
 
-    return <div className={`absolute inset-0 ${bgColor} rounded-lg`}>{animationComponent}</div>;
+    return (
+        <div className={`absolute inset-0 ${bgColor} rounded-lg`}>
+            <SnowAnimation />
+        </div>
+    );
 };
 
 export default WeatherAnimation;
