@@ -94,11 +94,49 @@ const config = {
                         opacity: '0',
                     },
                 },
+                lightning: {
+                    '0%': {
+                        opacity: '0',
+                        clipPath: 'inset(100% 0 0 0)',
+                        filter: 'brightness(1)',
+                    },
+                    '2%': {
+                        opacity: '1',
+                        clipPath: 'inset(0% 0 0% 0)',
+                        filter: 'brightness(3)',
+                    },
+                    '3%': {
+                        opacity: '0.9',
+                        clipPath: 'inset(0% 0 0% 0)',
+                        filter: 'brightness(2.5)',
+                    },
+                    '4%': {
+                        opacity: '1',
+                        clipPath: 'inset(0% 0 0% 0)',
+                        filter: 'brightness(3.5)',
+                    },
+                    '5%': {
+                        opacity: '0.7',
+                        clipPath: 'inset(0% 0 0% 0)',
+                        filter: 'brightness(2)',
+                    },
+                    '6%': {
+                        opacity: '0',
+                        clipPath: 'inset(0% 0 100% 0)',
+                        filter: 'brightness(1)',
+                    },
+                    '100%': {
+                        opacity: '0',
+                        clipPath: 'inset(0% 0 100% 0)',
+                        filter: 'brightness(1)',
+                    },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 raindrop: 'raindrop 1s linear infinite',
+                lightning: 'lightning 4s ease-in-out infinite',
             },
             fontFamily: {
                 sans: ['var(--font-sans)', ...fontFamily.sans],
