@@ -2,6 +2,7 @@ import React from 'react';
 import { getWeatherType, getWeatherBackgroundColor } from './constants';
 import RainAnimation from './RainAnimation';
 import ThunderstormAnimation from './ThunderstormAnimation';
+import DrizzleAnimation from './DrizzleAnimation';
 
 type WeatherAnimationProps = {
     weatherId: number;
@@ -18,6 +19,9 @@ const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
             break;
         case 'thunderstorm':
             animationComponent = <ThunderstormAnimation />;
+            break;
+        case 'drizzle':
+            animationComponent = <DrizzleAnimation />;
             break;
         default:
             animationComponent = null;
