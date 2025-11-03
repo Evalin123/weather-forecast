@@ -5,10 +5,10 @@ import { getWeatherByCityQuery } from '@/app/api/weather/byCity/route';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { isNotNil } from 'ramda';
 import { Button } from '../ui/button';
-import { SkeletonCard } from '../shared/Card/SkeletonCard';
-import { getWeatherBackgroundColor } from '@/utils/getWeatherBackgroundColor';
 import clsx from 'clsx';
+import { SkeletonCard } from '../shared/Card/SkeletonCard';
 import { useStore } from '@/app/store';
+import WeatherAnimation from '../WeatherAnimation';
 import {
     Drawer,
     DrawerContent,
@@ -47,12 +47,12 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
     if (isPending || isPlaceholderData) {
         return <SkeletonCard />;
     }
-    const bgColor = getWeatherBackgroundColor(data.weather[0].id);
 
     return (
         <>
-            <Card className={clsx(['weather-card', 'w-full', bgColor, 'relative'])}>
-                <CardHeader className="pb-2 pr-12">
+            <Card className={clsx('weather-card w-full relative overflow-hidden')}>
+                <WeatherAnimation weatherId={data.weather[0].id} />
+                <CardHeader className="pb-2 pr-12 relative z-10">
                     <CardTitle className="weather-card-title flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <span>{data?.name}</span>
@@ -67,7 +67,7 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                         </Button>
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="pb-4">
+                <CardContent className="pb-4 relative z-10">
                     <div className="flex items-center justify-between">
                         <div className="flex-1">
                             <div className="weather-icon-wrapper">
@@ -95,7 +95,7 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="gap-2 pt-4 border-t border-gray-200/50">
+                <CardFooter className="gap-2 pt-4 border-t border-gray-200/50 relative z-10">
                     <Button
                         variant="outline"
                         className="flex-1 btn-primary"

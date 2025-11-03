@@ -5,9 +5,10 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getWeatherByCoordsQuery } from '@/app/api/weather/byCoords/route';
 import { isNotNil } from 'ramda';
 import { Button } from '../ui/button';
+import clsx from 'clsx';
 import { SkeletonCard } from '../shared/Card/SkeletonCard';
-import { getWeatherBackgroundColor } from '@/utils/getWeatherBackgroundColor';
 import { useStore } from '@/app/store';
+import WeatherAnimation from '../WeatherAnimation';
 import { Navigation, X, Info } from 'lucide-react';
 import {
     Drawer,
@@ -47,11 +48,11 @@ const LocationWeatherCard = ({ latitude, longitude }: LocationWeatherCardProps) 
         return <SkeletonCard />;
     }
 
-    const bgColor = getWeatherBackgroundColor(data.weather[0].id);
     return (
         <>
-            <Card className={`weather-card w-full ${bgColor} relative`}>
-                <CardHeader className="pb-2 pr-12">
+            <Card className={clsx('weather-card w-full relative overflow-hidden')}>
+                <WeatherAnimation weatherId={data.weather[0].id} />
+                <CardHeader className="pb-2 pr-12 relative z-10">
                     <CardTitle className="weather-card-title flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <Navigation className="h-5 w-5" />
@@ -68,7 +69,7 @@ const LocationWeatherCard = ({ latitude, longitude }: LocationWeatherCardProps) 
                         </Button>
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="pb-4">
+                <CardContent className="pb-4 relative z-10">
                     <div className="flex items-center justify-between">
                         <div className="flex-1">
                             <div className="weather-icon-wrapper">
@@ -96,7 +97,7 @@ const LocationWeatherCard = ({ latitude, longitude }: LocationWeatherCardProps) 
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="gap-2 pt-4 border-t border-gray-200/50">
+                <CardFooter className="gap-2 pt-4 border-t border-gray-200/50 relative z-10">
                     <Button
                         variant="outline"
                         className="flex-1 btn-primary"

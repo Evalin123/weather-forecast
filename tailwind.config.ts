@@ -1,7 +1,6 @@
 import type { Config } from 'tailwindcss';
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
-const WEATHER_COLOR = ['#4a4e69', '#6a0572', '#1b98e0', '#e0f7fa', '#9e9d89', '#f0c929', '#778da9'];
 const config = {
     darkMode: ['class'],
     content: [
@@ -78,10 +77,28 @@ const config = {
                     from: { height: 'var(--radix-accordion-content-height)' },
                     to: { height: '0' },
                 },
+                raindrop: {
+                    '0%': {
+                        top: '-50px',
+                        transform: 'translate3d(40px, 0, 0) scaleX(1) scaleY(1) rotate(17deg)',
+                        opacity: '1',
+                    },
+                    '85%': {
+                        top: 'calc(100% - 5px)',
+                        transform: 'translate3d(0, 0, 0) scaleX(1) scaleY(1) rotate(17deg)',
+                        opacity: '1',
+                    },
+                    '100%': {
+                        top: 'calc(100% - 5px)',
+                        transform: 'translate3d(0, 0, 0) scaleX(3) scaleY(0) rotate(0deg)',
+                        opacity: '0',
+                    },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
+                raindrop: 'raindrop 1s linear infinite',
             },
             fontFamily: {
                 sans: ['var(--font-sans)', ...fontFamily.sans],

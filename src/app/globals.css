@@ -171,6 +171,110 @@
         padding: 0.5rem;
     }
 
+    /* 雨滴動畫樣式 */
+    .raindrop-big,
+    .raindrop-medium,
+    .raindrop-small {
+        position: absolute;
+        z-index: 20;
+        border-radius: 50%;
+        background: #7fc1f9;
+        transform-origin: 50% 100%;
+        pointer-events: none;
+    }
+
+    .raindrop-big {
+        width: 8px;
+        height: 8px;
+    }
+
+    .raindrop-medium {
+        width: 6px;
+        height: 6px;
+        opacity: 0.6;
+    }
+
+    .raindrop-small {
+        width: 4px;
+        height: 4px;
+        opacity: 0.3;
+    }
+
+    /* 大雨滴的 :before 和 :after */
+    .raindrop-big::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -2px;
+        left: 1px;
+        width: 6px;
+        height: 6px;
+        background: #7fc1f9;
+        border-radius: 3px;
+    }
+
+    .raindrop-big::after {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -5px;
+        left: 2px;
+        width: 4px;
+        height: 10px;
+        background: #7fc1f9;
+        border-radius: 50%;
+    }
+
+    /* 中雨滴的 :before 和 :after */
+    .raindrop-medium::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -2px;
+        left: 1px;
+        width: 4px;
+        height: 4px;
+        background: #7fc1f9;
+        border-radius: 2px;
+    }
+
+    .raindrop-medium::after {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -4px;
+        left: 2px;
+        width: 2px;
+        height: 6px;
+        background: #7fc1f9;
+        border-radius: 50%;
+    }
+
+    /* 小雨滴的 :before 和 :after */
+    .raindrop-small::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -2px;
+        left: 1px;
+        width: 2px;
+        height: 2px;
+        background: #7fc1f9;
+        border-radius: 50%;
+    }
+
+    .raindrop-small::after {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -3px;
+        left: 1px;
+        width: 2px;
+        height: 4px;
+        background: #7fc1f9;
+        border-radius: 50%;
+    }
+
     @media (max-width: 768px) {
         .weather-title {
             font-size: 2.5rem;
