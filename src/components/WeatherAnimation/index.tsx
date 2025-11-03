@@ -4,6 +4,7 @@ import RainAnimation from './RainAnimation';
 import ThunderstormAnimation from './ThunderstormAnimation';
 import DrizzleAnimation from './DrizzleAnimation';
 import SnowAnimation from './SnowAnimation';
+import AtmosphereAnimation from './AtmosphereAnimation';
 
 type WeatherAnimationProps = {
     weatherId: number;
@@ -27,13 +28,16 @@ const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
         case 'snow':
             animationComponent = <SnowAnimation />;
             break;
+        case 'atmosphere':
+            animationComponent = <AtmosphereAnimation />;
+            break;
         default:
             animationComponent = null;
     }
 
     return (
         <div className={`absolute inset-0 ${bgColor} rounded-lg`}>
-            <SnowAnimation />
+            <AtmosphereAnimation />
         </div>
     );
 };

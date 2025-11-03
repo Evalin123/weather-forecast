@@ -171,7 +171,6 @@
         padding: 0.5rem;
     }
 
-    /* 雨滴動畫樣式 */
     .raindrop-big,
     .raindrop-medium,
     .raindrop-small {
@@ -200,7 +199,6 @@
         opacity: 0.3;
     }
 
-    /* 大雨滴的 :before 和 :after */
     .raindrop-big::before {
         content: '';
         position: absolute;
@@ -225,7 +223,6 @@
         border-radius: 50%;
     }
 
-    /* 中雨滴的 :before 和 :after */
     .raindrop-medium::before {
         content: '';
         position: absolute;
@@ -250,7 +247,6 @@
         border-radius: 50%;
     }
 
-    /* 小雨滴的 :before 和 :after */
     .raindrop-small::before {
         content: '';
         position: absolute;
@@ -275,8 +271,8 @@
         border-radius: 50%;
     }
 
-    .drizzledrop-small,
-    .drizzledrop-tiny {
+    .drizzle-drop-small,
+    .drizzle-drop-tiny {
         position: absolute;
         z-index: 20;
         border-radius: 50%;
@@ -401,6 +397,123 @@
             no-repeat center;
         background-size: contain;
         filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+    }
+
+    .fog-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+        -webkit-filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+    }
+
+    .fog-layer {
+        height: 100%;
+        position: absolute;
+        width: 200%;
+    }
+
+    .fog-image {
+        float: left;
+        height: 100%;
+        width: 50%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .fog-image-01 {
+        background-image: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png');
+    }
+
+    .fog-image-02 {
+        background-image: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png');
+    }
+
+    #foglayer_01 {
+        animation:
+            foglayer_01_opacity 10s linear infinite,
+            foglayer_moveme 15s linear infinite;
+    }
+
+    #foglayer_02 {
+        animation:
+            foglayer_02_opacity 21s linear infinite,
+            foglayer_moveme 13s linear infinite;
+    }
+
+    #foglayer_03 {
+        animation:
+            foglayer_03_opacity 18s linear infinite,
+            foglayer_moveme 17s linear infinite;
+    }
+
+    @keyframes foglayer_moveme {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: -100%;
+        }
+    }
+
+    @keyframes foglayer_01_opacity {
+        0% {
+            opacity: 0.1;
+        }
+        22% {
+            opacity: 0.5;
+        }
+        40% {
+            opacity: 0.28;
+        }
+        58% {
+            opacity: 0.4;
+        }
+        80% {
+            opacity: 0.16;
+        }
+        100% {
+            opacity: 0.1;
+        }
+    }
+
+    @keyframes foglayer_02_opacity {
+        0% {
+            opacity: 0.5;
+        }
+        25% {
+            opacity: 0.2;
+        }
+        50% {
+            opacity: 0.1;
+        }
+        80% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes foglayer_03_opacity {
+        0% {
+            opacity: 0.8;
+        }
+        27% {
+            opacity: 0.2;
+        }
+        52% {
+            opacity: 0.6;
+        }
+        68% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 0.8;
+        }
     }
 
     .lightning {
