@@ -11,7 +11,7 @@ const CloudsAnimation = () => {
     ];
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg bg-gray-300">
             {clouds.map(cloud => (
                 <div
                     key={cloud.id}

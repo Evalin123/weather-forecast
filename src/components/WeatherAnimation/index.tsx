@@ -1,5 +1,5 @@
 import React from 'react';
-import { getWeatherType, getWeatherBackgroundColor } from './constants';
+import { getWeatherType } from './constants';
 import RainAnimation from './RainAnimation';
 import ThunderstormAnimation from './ThunderstormAnimation';
 import DrizzleAnimation from './DrizzleAnimation';
@@ -14,9 +14,9 @@ type WeatherAnimationProps = {
 
 const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
     const weatherType = getWeatherType(weatherId);
-    const bgColor = getWeatherBackgroundColor(weatherId);
 
     let animationComponent = null;
+
     switch (weatherType) {
         case 'rain':
             animationComponent = <RainAnimation />;
@@ -40,10 +40,14 @@ const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
             animationComponent = <CloudsAnimation />;
             break;
         default:
-            animationComponent = null;
+            return <div className="absolute inset-0 bg-gray-200 rounded-lg"></div>;
     }
 
-    return <div className={`absolute inset-0 ${bgColor} rounded-lg`}>{animationComponent}</div>;
+    return (
+        <div className="absolute inset-0 rounded-lg">
+            <DrizzleAnimation />
+        </div>
+    );
 };
 
 export default WeatherAnimation;

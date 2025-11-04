@@ -10,7 +10,7 @@ const ClearAnimation = () => {
     }));
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg bg-sky-300">
             <div className="sun" style={sunPosition}>
                 <div className="sun-core"></div>
 

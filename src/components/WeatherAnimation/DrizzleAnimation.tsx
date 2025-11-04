@@ -16,7 +16,7 @@ const DrizzleAnimation = () => {
     }));
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg bg-slate-400">
             {smallDrops.map(drop => (
                 <div
                     key={drop.id}

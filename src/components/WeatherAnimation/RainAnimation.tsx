@@ -23,7 +23,7 @@ const RainAnimation = () => {
     }));
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg bg-slate-500">
             {bigDrops.map(drop => (
                 <div
                     key={drop.id}

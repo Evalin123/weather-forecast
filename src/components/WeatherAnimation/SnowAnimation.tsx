@@ -23,7 +23,7 @@ const SnowAnimation = () => {
     }));
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg bg-slate-200">
             {bigFlakes.map(flake => (
                 <div
                     key={flake.id}
