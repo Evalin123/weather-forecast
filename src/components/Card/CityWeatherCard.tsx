@@ -116,7 +116,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                 </CardFooter>
             </Card>
 
-            {/* Drawer for detailed information */}
             <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
                 <DrawerContent className="max-h-[85vh]">
                     <DrawerHeader className="sticky top-0 bg-background z-10 border-b">
@@ -132,7 +131,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                     </DrawerHeader>
 
                     <div className="px-4 py-6 max-w-4xl mx-auto w-full overflow-y-auto flex-1">
-                        {/* Current Weather Summary */}
                         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-6">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-4">
@@ -154,9 +152,7 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                             </div>
                         </div>
 
-                        {/* Detailed Information Grid */}
                         <div className="grid grid-cols-2 gap-4">
-                            {/* Temperature Range */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Temperature Range</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -165,7 +161,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Wind */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Wind</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -176,7 +171,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Humidity */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Humidity</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -184,7 +178,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Pressure */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Pressure</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -192,7 +185,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Sunrise */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Sunrise</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -200,7 +192,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Sunset */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Sunset</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -208,7 +199,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Visibility */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Visibility</p>
                                 <p className="text-xl font-semibold text-gray-800">
@@ -216,7 +206,6 @@ const CityWeatherCard = ({ city }: CityWeatherCardProps) => {
                                 </p>
                             </div>
 
-                            {/* Cloud Coverage */}
                             <div className="bg-white rounded-lg p-4 shadow-sm border">
                                 <p className="text-sm text-gray-500 mb-1">Cloud Coverage</p>
                                 <p className="text-xl font-semibold text-gray-800">

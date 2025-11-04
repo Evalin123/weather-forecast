@@ -6,6 +6,7 @@ import DrizzleAnimation from './DrizzleAnimation';
 import SnowAnimation from './SnowAnimation';
 import AtmosphereAnimation from './AtmosphereAnimation';
 import ClearAnimation from './ClearAnimation';
+import CloudsAnimation from './CloudsAnimation';
 
 type WeatherAnimationProps = {
     weatherId: number;
@@ -34,6 +35,9 @@ const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
             break;
         case 'clear':
             animationComponent = <ClearAnimation />;
+            break;
+        case 'clouds':
+            animationComponent = <CloudsAnimation />;
             break;
         default:
             animationComponent = null;

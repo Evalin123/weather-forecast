@@ -1,7 +1,7 @@
 /**
- * 將風向角度轉換為 8 個方位（英文）
- * @param deg 風向角度 (0-360)
- * @returns 方位字符串 (N, NE, E, SE, S, SW, W, NW)
+ * Convert wind direction angle to 8 directions
+ * @param deg Wind direction angle (0-360)
+ * @returns Directions string (N, NE, E, SE, S, SW, W, NW)
  */
 export const degToDirection = (deg: number): string => {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
@@ -10,10 +10,10 @@ export const degToDirection = (deg: number): string => {
 };
 
 /**
- * 將 Unix timestamp 轉換為 HH:MM 格式
- * @param timestamp Unix timestamp (秒)
- * @param timezone 時區偏移（秒）
- * @returns 時間字符串 (HH:MM)
+ * Convert Unix timestamp to HH:MM format
+ * @param timestamp Unix timestamp (seconds)
+ * @param timezone Timezone offset (seconds)
+ * @returns Time string (HH:MM)
  */
 export const formatTime = (timestamp: number, timezone: number = 0): string => {
     const date = new Date((timestamp + timezone) * 1000);
@@ -23,9 +23,9 @@ export const formatTime = (timestamp: number, timezone: number = 0): string => {
 };
 
 /**
- * 格式化風速（米/秒 轉為 公里/小時）
- * @param speed 風速（米/秒）
- * @returns 格式化的風速字符串
+ * Format wind speed (meters/second to kilometers/hour)
+ * @param speed Wind speed (meters/second)
+ * @returns Formatted wind speed string
  */
 export const formatWindSpeed = (speed: number): string => {
     const kmh = (speed * 3.6).toFixed(1);
@@ -33,9 +33,9 @@ export const formatWindSpeed = (speed: number): string => {
 };
 
 /**
- * 格式化能見度
- * @param visibility 能見度（米）
- * @returns 格式化的能見度字符串
+ * Format visibility (meters to kilometers)
+ * @param visibility Visibility (meters)
+ * @returns Formatted visibility string
  */
 export const formatVisibility = (visibility: number): string => {
     if (visibility >= 1000) {

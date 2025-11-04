@@ -516,7 +516,6 @@
         }
     }
 
-    /* ---------- Clear Weather - Sun Effect ---------- */
     .sun {
         position: absolute;
         width: 180px;
@@ -579,7 +578,6 @@
         }
     }
 
-    /* 阳光从太阳发散的效果 */
     .sunlight-container {
         position: absolute;
         top: 0;
@@ -633,6 +631,75 @@
         }
         90% {
             opacity: 0.4;
+        }
+    }
+
+    .cloud {
+        position: absolute;
+        left: -20%;
+        animation: cloud-move linear infinite;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .cloud-large {
+        transform: scale(1.2);
+    }
+
+    .cloud-medium {
+        transform: scale(1);
+    }
+
+    .cloud-small {
+        transform: scale(0.7);
+    }
+
+    .cloud-part {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+    }
+
+    .cloud-part-1 {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .cloud-part-2 {
+        width: 80px;
+        height: 80px;
+        top: 0;
+        left: 40px;
+    }
+
+    .cloud-part-3 {
+        width: 70px;
+        height: 70px;
+        top: 5px;
+        left: 80px;
+    }
+
+    .cloud-part-4 {
+        width: 50px;
+        height: 50px;
+        top: 20px;
+        left: 120px;
+    }
+
+    .cloud-part-5 {
+        width: 65px;
+        height: 65px;
+        top: 15px;
+        left: 55px;
+    }
+
+    @keyframes cloud-move {
+        0% {
+            left: -20%;
+        }
+        100% {
+            left: 120%;
         }
     }
 
