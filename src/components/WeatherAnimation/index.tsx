@@ -15,7 +15,7 @@ type WeatherAnimationProps = {
 const WeatherAnimation = ({ weatherId }: WeatherAnimationProps) => {
     const weatherType = getWeatherType(weatherId);
 
-    let animationComponent = null;
+    let animationComponent;
 
     switch (weatherType) {
         case 'rain':

@@ -6,13 +6,13 @@ export const weatherRanges = [
     { start: 700, end: 800, type: 'atmosphere' },
     { start: 800, end: 801, type: 'clear' },
     { start: 801, end: 900, type: 'clouds' },
-];
+] as const;
 
-export const getWeatherType = (id: number): string => {
+export const getWeatherType = (id: number): (typeof weatherRanges)[number]['type'] | undefined => {
     for (const range of weatherRanges) {
         if (id >= range.start && id < range.end) {
             return range.type;
         }
     }
-    return 'clear';
+    return undefined;
 };
